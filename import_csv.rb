@@ -5,8 +5,7 @@ def import_csv(file, symbolize_names: true)
   CSV.foreach(file, headers: true) do |row|
     if symbolize_names
       data << row.to_h
-        .compact # Remove nil keys
-        .transform_keys { |key| key.downcase.gsub(' ', '_').to_sym }
+        .transform_keys { |key| key&.downcase&.gsub(' ', '_')&.to_sym }
     else
       data << row.to_h
     end
