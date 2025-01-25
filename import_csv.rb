@@ -2,6 +2,7 @@ require 'csv'
 
 def import_csv(file, symbolize_names: true)
   data = []
+  file = File.expand_path(file) if file.start_with?('~')
   CSV.foreach(file, headers: true) do |row|
     if symbolize_names
       data << row.to_h
